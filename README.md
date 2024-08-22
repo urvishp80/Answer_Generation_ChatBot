@@ -106,20 +106,3 @@ Answer_Generation_ChatBot/
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for any changes.
-
-## License
-
-None
-```
-
-### Description Breakdown
-
-- **Project Title**: The title of your project.
-- **Description**: A brief intro to what the project does.
-- **Features**: Key features of your chatbot.
-- **Requirements**: Prerequisites like Python version and necessary APIs.
-- **Installation**: Steps to clone the repo, set up the environment, install dependencies, and configure the database.
-- **Usage**: Instructions to run the server and use the API.
-- **Project Structure**: Overview of the file and folder structure.
-- **Contributing**: Invitation for contributions and instructions on how to do so.
-- **License**: Licensing information of your project.
