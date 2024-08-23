@@ -1,5 +1,8 @@
+import os
+import sys
+sys.path.append(os.getcwd())
 from sqlalchemy import create_engine, inspect
-from app.db.database import db_uri
+from core.config import settings
 
 
 # Function to inspect the database
@@ -76,11 +79,17 @@ def inspect_tables_and_columns(uri, schema="clearbuydb"):
         print(f"Error occurred: {e}")
 
 
-# Call the function to inspect the database
-# inspect_database(db_uri)
+if __name__ == "__main__":
 
-# Call the function to inspect views in the 'clearbuydb' schema
-# inspect_views(db_uri)
+    # Get the database URI from settings
+    uri = settings.DATABASE_URI
+    print(f"Database URI: {uri}")
 
-# Call the function to inspect tables and their columns in the 'clearbuydb' schema
-inspect_tables_and_columns(db_uri)
+    # Call the function to inspect the database
+    inspect_database(uri)
+
+    # Call the function to inspect views in the 'clearbuydb' schema
+    inspect_views(uri)
+
+    # Call the function to inspect tables and their columns in the 'clearbuydb' schema
+    inspect_tables_and_columns(uri)
