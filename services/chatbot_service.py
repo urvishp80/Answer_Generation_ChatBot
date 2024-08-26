@@ -8,6 +8,7 @@ from langchain_community.agent_toolkits import SQLDatabaseToolkit
 from langchain_core.prompts import MessagesPlaceholder
 from langchain_openai import ChatOpenAI
 from sqlalchemy.orm import Session
+from starlette import status
 from starlette.responses import JSONResponse
 from fastapi import HTTPException
 from core.config import settings
@@ -230,7 +231,7 @@ def get_openai_response_with_langchain(user_question: str, db: Session, user_id:
         db.commit()
 
         return JSONResponse(
-            status_code=200,
+            status_code=status.HTTP_200_OK,
             content={
                 "status": True,
                 "message": "Success",
@@ -248,7 +249,7 @@ def clear_chat_history(user_id: str, db: Session):
     db.query(ChatHistory).filter(ChatHistory.user_id == user_id).delete()
     db.commit()
     return JSONResponse(
-        status_code=200,
+        status_code=status.HTTP_200_OK,
         content={
             "status": True,
             "message": "Success",
