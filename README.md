@@ -1,6 +1,6 @@
 # Answer Generation ChatBot
 
-Answer_Generation_ChatBot is a FastAPI-based chatbot designed to generate and handle questions related to product recommendations. It uses OpenAI's GPT-4 model to generate responses and SQLAlchemy to interact with a MySQL database for storing chat history.
+Answer Generation ChatBot is a FastAPI-based chatbot designed to generate and handle questions related to product recommendations. It uses OpenAI's GPT-4 model to generate responses and SQLAlchemy to interact with a MySQL database for storing chat history.
 
 ## Features
 
@@ -69,6 +69,7 @@ Answer_Generation_ChatBot is a FastAPI-based chatbot designed to generate and ha
 
    Access the API documentation at `http://0.0.0.0:8878/docs`
 
+
 2. **Endpoints:**
 
    - **Root Endpoint:**
@@ -77,14 +78,54 @@ Answer_Generation_ChatBot is a FastAPI-based chatbot designed to generate and ha
       ```
 
    - **Ask Endpoint:**
-      ```sh
-      curl -X POST "http://0.0.0.0:8878/chatbots/ask" -H "Content-Type: application/x-www-form-urlencoded" -d "user_question=Hi i am looking for earbuds for running it must be durable and at good price&user_id=12234"
-      ```
+     ```sh
+     curl -X POST "http://0.0.0.0:8878/chatbots/ask" -H "Content-Type: application/json" -d '{
+         "user_question": "Hi, I am looking for earbuds for running. They must be durable and at a good price.",
+         "user_id": "12345"
+     }'
+     ```
 
-   - **Clear Chat Endpoint:**
-      ```sh
-      curl -X DELETE "http://0.0.0.0:8878/chatbots/clear-chat" -H "Content-Type: application/x-www-form-urlencoded" -d "user_id=12234"
-      ```
+     - **Example Input:**
+       ```json
+       {
+           "user_question": "Hi, I am looking for earbuds for running. They must be durable and at a good price.",
+           "user_id": "12345"
+       }
+       ```
+
+     - **Example Output:**
+       ```json
+       {
+           "status": true,
+           "message": "Success",
+           "data": {
+               "user_question": "Hi, I am looking for earbuds for running. They must be durable and at a good price.",
+               "response": "Here are some great earbuds that are durable, affordable, and ideal for running:\n\n1. **Anker Soundcore Life A1**\n   - **Price:** $49.99\n   - **Full Overview:** These earbuds from Anker offer a secure fit, making them great for running. With good sound quality and a budget-friendly price, they are a solid choice for anyone looking to enjoy music while staying active.\n   - [Product Link](https://www.amazon.com/dp/B08KDZ2NZX?tag=at88-20&linkCode=ogi&th=1&psc=1)\n   - ![Image](https://clearbuy-cloud.nyc3.digitaloceanspaces.com/media/4232/Soundcore-by-Anker-Life-A1-True-Wireless-Earbuds.jpg)\n\n2. **Bose Sport Earbuds**\n   - **Price:** $179.00\n   - **Full Overview:** The Bose Sport Earbuds are very comfortable and make significant improvements over their predecessor, the Bose SoundSport Free. They come with a secure fit, fast charging, and good sound quality. However, they lack Bluetooth multipoint, and you need the Bose Music app to switch between devices.\n   - [Product Link](https://www.amazon.com/dp/B08CJCTG6Z?tag=at88-20&linkCode=ogi&th=1&psc=1)\n   - [Full Review](https://www.soundguys.com/bose-sport-earbuds-review-42944/)\n   - ![Image](https://clearbuy-cloud.nyc3.digitaloceanspaces.com/media/2965/Bose-Sport-Earbuds.jpg)\n\n3. **Jabra Elite 3**\n   - **Price:** $79.00\n   - **Full Overview:** The Jabra Elite 3 is an affordable option that offers support for aptX and good audio output. Pros include the price, sound quality, and battery life, but it lacks AAC support, and the microphone quality is mediocre.\n   - [Product Link](https://www.amazon.com/dp/B09B468VKX?tag=at88-20&linkCode=ogi&th=1&psc=1)\n   - [Full Review](https://www.soundguys.com/jabra-elite-3-review-59016/)\n   - ![Image](https://clearbuy-cloud.nyc3.digitaloceanspaces.com/media/5647/Jabra-Elite-3.jpg)\n\n4. **JLab Epic Air Sport ANC**\n   - **Price:** $99.00\n   - **Full Overview:** The JLab Epic Air Sport ANC is a durable, affordable, and versatile option for multifaceted individuals. Whether you're working out, on a hike, on public transit, or relaxing at home, these earbuds will be a reliable option for you.\n   - [Product Link](https://www.amazon.com/dp/B08W2FP767?tag=at88-20&linkCode=ogi&th=1&psc=1)\n   - [Full Review](https://www.soundguys.com/jlab-epic-air-sport-anc-review-74290/)\n   - ![Image](https://clearbuy-cloud.nyc3.digitaloceanspaces.com/media/3788/JLab-Epic-Air-Sport-ANC.jpg)\n\nThese earbuds are designed to stay in place and provide a secure fit, making them ideal for running.\n\n\nContinue the discussion."
+           }
+       }
+       ```
+     
+   - **Clear-Chat Endpoint:**
+     ```sh
+     curl -X POST "http://0.0.0.0:8878/chatbots/clear-chat" -H "Content-Type: application/json" -d '{
+         "user_id": "12345"
+     }'
+     ```
+
+     - **Example Input:**
+       ```json
+       {
+           "user_id": "12345"
+       }
+       ```
+
+     - **Example Output:**
+       ```json
+       {
+           "status": true,
+           "message": "Success"
+       }
+       ```
 
 ## Project Structure
 
@@ -95,9 +136,13 @@ Answer_Generation_ChatBot/
 ├── core/
 │   ├── bot_history_db.py
 │   └── config.py
+│   └── database_inspector.py
 ├── services/
 │   ├── chatbot_service.py
 │   └── db_init.py
+├── .gitignore
+├── README.md
+├── answer_generation_chatbot.postman_collection.json
 ├── main.py
 ├── requirements.txt
 └── .env
