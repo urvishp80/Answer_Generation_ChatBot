@@ -67,7 +67,7 @@ Answer Generation ChatBot is a FastAPI-based chatbot designed to generate and ha
    uvicorn main:app --reload --host 0.0.0.0 --port 8878
    ```
 
-   Access the API documentation at `http://0.0.0.0:8878/docs`
+   Access the API documentation at `http://0.0.0.0:8878/docs#/`
 
 
 2. **Endpoints:**
