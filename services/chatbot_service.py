@@ -33,6 +33,7 @@ def get_final_prompt():
                - If the user asks for product recommendations, retrieve up to four products from the `SG_product_full_info_materialized` table that are relevant to the user's query.
                - Translate any IDs (e.g., `id`, `category_id`, `brand_id`) into their corresponding names.
                - Provide a concise summary in human-readable sentences, limited to 50 words per product.
+               - When a user asks about a specific product, attempt to find relevant information in the database. If an exact match for the product name isn't found, search for products that have similar names or share keywords with the queried product. Display any related products found.
             
             3. **User-Centric Responses:**
                - Format responses to be user-friendly and precise.
