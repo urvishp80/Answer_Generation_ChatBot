@@ -21,3 +21,4 @@ tenacity==8.5.0
 tiktoken==0.7.0
 typing-extensions==4.12.2
 uvicorn==0.26.1
+fastapi==0.103.0
