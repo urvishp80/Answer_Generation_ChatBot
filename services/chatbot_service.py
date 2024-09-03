@@ -247,12 +247,16 @@ def get_openai_response_with_langchain(user_question: str, db: Session, user_id:
         raise HTTPException(status_code=500, detail=str(e))
 
 def clear_chat_history(user_id: str, db: Session):
-    db.query(ChatHistory).filter(ChatHistory.user_id == user_id).delete()
-    db.commit()
-    return JSONResponse(
-        status_code=status.HTTP_200_OK,
-        content={
-            "status": True,
-            "message": "Success",
-        }
-    )
+    try:
+        db.query(ChatHistory).filter(ChatHistory.user_id == user_id).delete()
+        db.commit()
+        return JSONResponse(
+            status_code=status.HTTP_200_OK,
+            content={
+                "status": True,
+                "message": "Success",
+            }
+        )
+    except Exception as e:
+        logging.error(f"Error in clear_chat_history: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal Server Error, please check the logs.")
