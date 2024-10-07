@@ -1,0 +1,114 @@
+{
+    "info": {
+        "name": "Chatbot API Collection",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Root Endpoint",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8878/",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8878",
+                    "path": [
+                        ""
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Ask Endpoint",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n \"user_question\": \"Hi\",\n \"user_id\": \"12345\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:8878/chatbots/ask",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8878",
+                    "path": [
+                        "chatbots",
+                        "ask"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Clear Chat Endpoint",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n \"user_id\": \"12345\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:8878/chatbots/clear-chat",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8878",
+                    "path": [
+                        "chatbots",
+                        "clear-chat"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Chat History Endpoint",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n \"user_id\": \"12345\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:8878/chatbots/chat-history",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8878",
+                    "path": [
+                        "chatbots",
+                        "chat-history"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}
