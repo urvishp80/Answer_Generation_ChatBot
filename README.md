@@ -59,7 +59,7 @@ Answer Generation ChatBot is a FastAPI-based chatbot designed to generate and ha
    python services/db_init.py
    ```
 
-## Usage
+## Local Usage
 
 1. **Run the FastAPI Application:**
 
@@ -88,7 +88,7 @@ Answer Generation ChatBot is a FastAPI-based chatbot designed to generate and ha
      - **Example Input:**
        ```json
        {
-           "user_question": "Hi, I am looking for earbuds for running. They must be durable and at a good price.",
+           "user_question": "Hi, I am looking for earbuds for climbing.",
            "user_id": "12345"
        }
        ```
@@ -96,14 +96,15 @@ Answer Generation ChatBot is a FastAPI-based chatbot designed to generate and ha
      - **Example Output:**
        ```json
        {
-           "status": true,
-           "message": "Success",
-           "data": {
-               "user_question": "Hi, I am looking for earbuds for running. They must be durable and at a good price.",
-               "response": "Here are some great earbuds that are durable, affordable, and ideal for running:\n\n1. **Anker Soundcore Life A1**\n   - **Price:** $49.99\n   - **Full Overview:** These earbuds from Anker offer a secure fit, making them great for running. With good sound quality and a budget-friendly price, they are a solid choice for anyone looking to enjoy music while staying active.\n   - [Product Link](https://www.amazon.com/dp/B08KDZ2NZX?tag=at88-20&linkCode=ogi&th=1&psc=1)\n   - ![Image](https://clearbuy-cloud.nyc3.digitaloceanspaces.com/media/4232/Soundcore-by-Anker-Life-A1-True-Wireless-Earbuds.jpg)\n\n2. **Bose Sport Earbuds**\n   - **Price:** $179.00\n   - **Full Overview:** The Bose Sport Earbuds are very comfortable and make significant improvements over their predecessor, the Bose SoundSport Free. They come with a secure fit, fast charging, and good sound quality. However, they lack Bluetooth multipoint, and you need the Bose Music app to switch between devices.\n   - [Product Link](https://www.amazon.com/dp/B08CJCTG6Z?tag=at88-20&linkCode=ogi&th=1&psc=1)\n   - [Full Review](https://www.soundguys.com/bose-sport-earbuds-review-42944/)\n   - ![Image](https://clearbuy-cloud.nyc3.digitaloceanspaces.com/media/2965/Bose-Sport-Earbuds.jpg)\n\n3. **Jabra Elite 3**\n   - **Price:** $79.00\n   - **Full Overview:** The Jabra Elite 3 is an affordable option that offers support for aptX and good audio output. Pros include the price, sound quality, and battery life, but it lacks AAC support, and the microphone quality is mediocre.\n   - [Product Link](https://www.amazon.com/dp/B09B468VKX?tag=at88-20&linkCode=ogi&th=1&psc=1)\n   - [Full Review](https://www.soundguys.com/jabra-elite-3-review-59016/)\n   - ![Image](https://clearbuy-cloud.nyc3.digitaloceanspaces.com/media/5647/Jabra-Elite-3.jpg)\n\n4. **JLab Epic Air Sport ANC**\n   - **Price:** $99.00\n   - **Full Overview:** The JLab Epic Air Sport ANC is a durable, affordable, and versatile option for multifaceted individuals. Whether you're working out, on a hike, on public transit, or relaxing at home, these earbuds will be a reliable option for you.\n   - [Product Link](https://www.amazon.com/dp/B08W2FP767?tag=at88-20&linkCode=ogi&th=1&psc=1)\n   - [Full Review](https://www.soundguys.com/jlab-epic-air-sport-anc-review-74290/)\n   - ![Image](https://clearbuy-cloud.nyc3.digitaloceanspaces.com/media/3788/JLab-Epic-Air-Sport-ANC.jpg)\n\nThese earbuds are designed to stay in place and provide a secure fit, making them ideal for running.\n\n\nContinue the discussion."
+        "status": true,
+        "message": "Success",
+        "data": {
+          "user_question": "Hi, I am looking for earbuds for climbing.",
+          "response": "These products offer distinct features, making them suitable for various needs. The Anker Soundcore Life A1 is an affordable option without many specified pros or cons. The Jabra Elite 3 stands out with aptX and good battery life but has a mediocre mic. The JLab Epic Air Sport ANC is versatile with good isolation and ANC but has touch control issues. The Jabra Elite 7 Active excels in sound quality and durability but lacks aptX support. Together, they cater to different preferences, from affordability to advanced features and durability. Choose based on your priorities. Is there anything else I can assist you with?",
+          "product_ids": ["143", "146", "149","459"]
            }
-       }
-       ```
+         }
+         ```
      
    - **Clear-Chat Endpoint:**
      ```sh
@@ -126,6 +127,156 @@ Answer Generation ChatBot is a FastAPI-based chatbot designed to generate and ha
            "message": "Success"
        }
        ```
+
+   - **Chat-history Endpoint:**
+     ```sh
+     curl -X POST "http://0.0.0.0:8878/chatbots/chat_history" -H "Content-Type: application/json" -d '{
+         "user_id": "12345"
+     }'
+     ```
+
+     - **Example Input:**
+       ```json
+       {
+           "user_id": "12345"
+       }
+       ```
+
+     - **Example Output:**
+        ```json
+         {
+           "status": true,
+           "message": "Success",
+           "data": [
+             {
+               "question": "I need earbuds to use for climbing.",
+               "answer": "These products offer distinct features, making them suitable for various needs. The Anker Soundcore Life A1 is an affordable option without many specified pros or cons. The Jabra Elite 3 stands out with aptX and good battery life but has a mediocre mic. The JLab Epic Air Sport ANC is versatile with good isolation and ANC but has touch control issues. The Jabra Elite 7 Active excels in sound quality and durability but lacks aptX support. Together, they cater to different preferences, from affordability to advanced features and durability. Choose based on your priorities. Is there anything else I can assist you with?",
+               "product_ids": [
+                 "143",
+                 "146",
+                 "149",
+                 "459"
+               ],
+               "timestamp": "2024-09-25T00:57:37"
+             }
+           ]
+         }
+       ```
+
+
+### Running on Heroku:
+
+1. **Deploy to Heroku:**
+
+   Follow the standard Heroku deployment process, setting up environment variables in the Heroku config as described above for the `.env` file.
+
+2. **Heroku Environment Variables:**
+
+   Make sure to set all necessary environment variables in your Heroku app settings:
+
+   ```env
+   DATABASE_USERNAME=your_database_username
+   DATABASE_PASSWORD=your_database_password
+   DATABASE_HOSTNAME=your_database_hostname
+   DATABASE_PORT=your_database_port
+   DATABASE_NAME=clearbuydb
+   SSLMODE=REQUIRED
+   OPENAI_API_KEY=your_openai_api_key
+   ORGANIZATION_ID=your_openai_organization_id
+   ```
+
+3. **Access Endpoints:**
+
+   - **Root Endpoint:**
+      ```sh
+      curl -X GET "https://<your-app-name>.herokuapp.com/"
+      ```
+
+   - **Ask Endpoint:**
+     ```sh
+     curl -X POST "https://<your-app-name>.herokuapp.com/chatbots/ask" -H "Content-Type: application/json" -d '{
+         "user_question": "Hi, I am looking for earbuds for running. They must be durable and at a good price.",
+         "user_id": "12345"
+     }'
+     ```
+
+     - **Example Input:**
+       ```json
+       {
+           "user_question": "Hi, I am looking for earbuds for running. They must be durable and at a good price.",
+           "user_id": "12345"
+       }
+       ```
+
+     - **Example Output:**
+       ```json
+       {
+           "status": true,
+           "message": "Success",
+           "data": {
+               "user_question": "Hi, I am looking for earbuds for running. They must be durable and at a good price.",
+               "response": "Here are some great earbuds that are durable, affordable, and ideal for running:..."
+           }
+       }
+       ```
+     
+   - **Clear-Chat Endpoint:**
+     ```sh
+     curl -X POST "https://<your-app-name>.herokuapp.com/chatbots/clear-chat" -H "Content-Type: application/json" -d '{
+         "user_id": "12345"
+     }'
+     ```
+
+     - **Example Input:**
+       ```json
+       {
+           "user_id": "12345"
+       }
+       ```
+
+     - **Example Output:**
+       ```json
+       {
+           "status": true,
+           "message": "Success"
+       }
+       ```
+
+   - **Chat-history Endpoint:**
+     ```sh
+     curl -X POST "https://<your-app-name>.herokuapp.com/chatbots/chat_history" -H "Content-Type: application/json" -d '{
+         "user_id": "12345"
+     }'
+     ```
+
+     - **Example Input:**
+       ```json
+       {
+           "user_id": "12345"
+       }
+       ```
+
+     - **Example Output:**
+        ```json
+         {
+           "status": true,
+           "message": "Success",
+           "data": [
+             {
+               "question": "I need earbuds to use for climbing.",
+               "answer": "These products offer distinct features, making them suitable for various needs. The Anker Soundcore Life A1 is an affordable option without many specified pros or cons. The Jabra Elite 3 stands out with aptX and good battery life but has a mediocre mic. The JLab Epic Air Sport ANC is versatile with good isolation and ANC but has touch control issues. The Jabra Elite 7 Active excels in sound quality and durability but lacks aptX support. Together, they cater to different preferences, from affordability to advanced features and durability. Choose based on your priorities. Is there anything else I can assist you with?",
+               "product_ids": [
+                 "143",
+                 "146",
+                 "149",
+                 "459"
+               ],
+               "timestamp": "2024-09-25T00:57:37"
+             }
+           ]
+         }
+       ```
+
 
 ## Project Structure
 
